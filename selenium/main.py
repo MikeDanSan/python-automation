@@ -1,3 +1,4 @@
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -17,11 +18,18 @@ def get_driver():
     driver.get("http://automated.pythonanywhere.com")
     return driver
 
+def clean_text(text):
+    '''Extract tempature from text'''
+    output = float(text.split(": ")[1])
+    return output
+
+
 def main():
 
     driver = get_driver()
-    element = driver.find_element(By.XPATH, "/html/body/div[1]/div/h1[1]")
+    time.sleep(2)
+    element = driver.find_element(By.XPATH, "/html/body/div[1]/div/h1[2]")
 
-    return element.text
+    return clean_text(element.text)
 
 print(main())
